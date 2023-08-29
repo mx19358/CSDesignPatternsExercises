@@ -8,12 +8,6 @@ namespace T5_2_5_Interfaces;
 public interface IFurnitureItem : IBelonging
 {
     /// <summary>
-    /// The furniture item's name.
-    /// </summary>
-    public string Name { get; set; }
-
-
-    /// <summary>
     /// Number of legs the furniture has.
     /// </summary>
     public uint NumberOfLegs { get; set; }

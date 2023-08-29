@@ -1,5 +1,5 @@
-﻿using T5_2_5_Interfaces;
-using T5_2_6_Generics;
+﻿using T5_2_5_Interfaces; //Add --> Project Reference (uses interfaces from this namespace)
+using T5_2_6_Generics; //defines namespace to be used
 
 BelongingList<IBelonging> belongings = new()
 {

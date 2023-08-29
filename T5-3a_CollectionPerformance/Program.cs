@@ -5,7 +5,7 @@ using System.Linq;
 
 // See https://aka.ms/new-console-template for more information
 
-const int count = 1_000_000;
+const int count = 1_000_000; //underscores make it more legible
 const int searchIndex = 551_467;
 
 string value;
@@ -36,7 +36,7 @@ Console.WriteLine();
 Console.WriteLine();
 
 
-
+//REPEAT USING A LIST
 List<Pair> list = new();
 
 sw.Restart();
@@ -64,7 +64,7 @@ Console.WriteLine();
 
 
 
-
+// REPEAT USING DICTIONARY
 Dictionary<int, string> dict = new();
 
 sw.Restart();

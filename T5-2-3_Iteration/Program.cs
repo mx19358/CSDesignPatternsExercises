@@ -1,7 +1,7 @@
 ﻿// foreach loops are in the next tutorial.
 
 // for loops
-for (int i = 0; i < 10; i++)
+for (int i = 0; i < 10; i++) // for(starting condition ; running condition ; increase by 1) --> usually for loops don't use greater/less than OR EQUAL TO
 {
     Console.Write($"{i} ");
 }
@@ -9,7 +9,7 @@ for (int i = 0; i < 10; i++)
 Console.WriteLine();
 Console.WriteLine();
 
-for (int i = 10; i > 0; i--)
+for (int i = 10; i > 0; i--) // for(starting condition ; continuation condition ; decrease by 1)
 {
     Console.Write($"{i} ");
 }
@@ -17,7 +17,7 @@ for (int i = 10; i > 0; i--)
 Console.WriteLine();
 Console.WriteLine();
 
-for (int i = 0; i < 10; i += 2)
+for (int i = 0; i < 10; i += 2) // increases i by increments of 2
 {
     Console.Write($"{i} ");
 }

@@ -10,7 +10,7 @@ public sealed class Truck : Vehicle
     /// <summary>
     /// The type of truck.
     /// </summary>
-    public TruckType TruckType { get; private set; }
+    public TruckType TruckType { get; private set; } // public TruckType(type) defines the property TruckType // get method retrieves the field behind // field value is set in constructor
 
 
     // Implementing a getter as a function.

@@ -17,7 +17,7 @@ public sealed class Motorbike : Vehicle
     }
 
     // Impementing a getter with a Lamda.
-    public override int NumberOfWheels => 2;
+    public override int NumberOfWheels => 2; // => is a POINTER (to aviod having to retype the 'get' ... part of the code
 
     public override Transmission Transmission => Transmission.Manual;
 

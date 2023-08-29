@@ -5,7 +5,7 @@ namespace T5_2_5_Interfaces;
 /// <summary>
 /// A general item that can be owned by an individual.
 /// </summary>
-public interface IBelonging
+public interface IBelonging //do not define(?) as it is the main interface --> the other interfaces are inherited from IBelonging
 {
     /// <summary>
     /// The item's name.

@@ -131,11 +131,11 @@ and therefore the method can change the data value (generally considered to be a
 
 #### Exercise 5.2.1.
 1. Run project `T5-2-1_DataTypes` to see some operations on `int`, `double` and `string` variables.
-1. Add some code to print out the individual characters of the array `name` by printing `name[0]` and 'name[1]'.
-1. Now try the same for the next index, `name[3]` and see what happens.
+1. Add some code to print out the individual characters of the array `names` by printing `names[0]` and `names[1]`.
+1. Now try the same for the next index, `names[3]` and see what happens.
 1. Print out `str1[3]` to see how you can access an indvidual character of a string. Also try `str1[1000]` to see what happens.
 1. Work out how to get a new string called `newResult` that takes the value "Ziegler" in `str2` and replaces the "er" with the text "wibble". Google it. Note that local variables like `newResult` by convention use
-[camel case](https://www.c-sharpcorner.com/UploadFile/8a67c0/C-Sharp-coding-standards-and-naming-conventions/). Get to know coding conventions for whatever language you are using.
+[camel case](https://www.c-sharpcorner.com/UploadFile/8a67c0/C-Sharp-coding-standards-and-naming-conventions/) : first letter of the word always in small letter and after that each word starts with a capital letter (e.g. camelCase). Get to know coding conventions for whatever language you are using.
 
 ### 5.2.2. Conditionals
 There are three types of conditional in C#:
@@ -145,7 +145,7 @@ There are three types of conditional in C#:
 
 #### Exercise 5.2.2.
 1. Run project `T5-2-2_Conditionals` to see `if` statements, `switch` statements and `switch` expressions in action.
-1. In the first `if` statement we are testing to see if the `randomNumber` modulus zero is equal to zero. Change this to test if `randomNumber` modulus 0 is not equal to 1 instead - the same result but with inverted logic (hint: '!=').
+1. In the first `if` statement we are testing to see if the `randomNumber` modulus two is equal to zero. Change this to test if `randomNumber` modulus 2 is not equal to 1 instead - the same result but with inverted logic (hint: '!=').
 1. In the test with `else if` insert another `else if` before the current one, testing to see if `randomNumber` is greater than or equal to 4. Now change that 4 to 7 and see what happens.
 1. In the `if (boolean)` example, invert the logic to test if `boolean` is false. There are two ways to do this, and one is not very obvious. Google is a better friend here than me.
 
@@ -174,17 +174,18 @@ Features of classes:
   - `public` is visible inside and outside of the namespace,
   - `internal` is visible inside the namespace but not externally,
   - `private` is visible only inside the class within which it is defined - this only makes sense for sub-classes (a class within a class).
+	- difference between internal and private in practice?
 - They can also be:
   - `static`, meaning that the user cannot instantiate an object of that class, but the class does have methods and members. So there's basically one version of the class for your whole
-  assembly.
+  assembly. (e.g. 'Math' (3 properties : E, pi and tau) /'MathF'(performed on floats) classes)
   - `abstract` are classes that cannot be instantiated, but need other classes to inherit from them.
   - `sealed` are classes you cannot inherit from - this makes them faster to run. Arguably C# should have been designed such that the default for classes is that they are sealed, and then to have an optional "unseal"
   see [this video by Nick Chapsas](https://www.youtube.com/watch?v=d76WWAD99Yo).
 - They have members that are either fields and properties:
-  - Fields are variables belonging to the class that are declared and do not have `get` and `set` methods. Keep fields only for `private` members (I think - Google it).
+  - Fields are variables belonging to the class that are declared and do not have `get` and `set` methods. Keep fields only for `private` members or `public read only` (I think - Google it).
   - Properties are variables that do have `get` and `set` (plus `init` - Google it) methods.
   - Both have scopes of `public`, `internal`, `private`, `protected` (visible inside the class and its descendents) and `private protected` (visible inside the class and its descendents within the same namespace).
-  - Fields can also have a `readonly` decoration, so they can only be set with an intial value or within the constructor (more on this below).
+  - Fields can also have a `readonly` decoration, so they can only be set with an intial value or within the constructor (more on this below). --> gogle
   - Property `set` methods can be `private set` (not quite the same as `init`).
 - They have methods:
   - These methods act both on internal and external data (i.e. supplied in parameters to the method).
@@ -195,13 +196,15 @@ Features of classes:
   - Can be `override` meaning that they override an `abstract` or `virtual` method in a parent class.
   - Can be `new` meaning that they override a method in a parent class. Note that if you cast one of these objects to the parent class, the parent's implementation of the method will be used.
   This feels like an "anti pattern", so I try not to use the `new` decorator.
+- 
+class = has method // struct has value
 
-#### Exercise 5.2.4.
+#### Exercise 5.2.4. -- PLEASE REDO COS I'M LOW KEY LOST
 1. Run project `T5-2-4_ClassAndStruct`.
 1. Step through the program with the debugger, inspecting what is going on at all stages.
 1. Copy this code to a new repo and modify the `Car` class to make it abstract. Then add 2 sealed classes for petrol and electric vehicles:
   - Petrol vehicles can be manual or automatic.
-  - EVs are only automatic.
+  - EVs are only automatic. --> to do this, remove the transmitter section from Car and copy and paste that into the 
   - For petrol vehicles add properties `MilesPerGallon` and `TankSizeLitres`, both of which are populated from the constructor.
   - For EVs add properties `MilesPerKwh` and `BatteryCapacityKwh`, both of which again are populated from the constructor.
   - Add an abstract method `GetRange()` that returns a double with the range of the vehicle in miles. Implement this in both the petrol and EV classes.
@@ -230,7 +233,7 @@ of other classes. Lists for instance can contain any type of item. Exercise 5.2.
 1. Modify the `BelongingList<T>` to return the count of plants and a list of plants.
 
 ## 5.3. Collections and collection performance
-We have used arrays and lists, both of which are of type `ICollection`. We have also seen `IEnumerable`, from which `ICollection` is derived. Google these.
+We have used arrays (faster) and lists (defined), both of which are of type `ICollection`. We have also seen `IEnumerable`, from which `ICollection` is derived. Google these.
 
 The question is why do we have different collection types? The answer is twofold: performance and utility. Arrays have a defined size and cannot have items added or removed. Lists can add
 and remove items and have dynamic size. Arrays are faster to index than lists.

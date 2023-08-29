@@ -1,4 +1,4 @@
-﻿using MoreLinq;
+﻿using MoreLinq; //RANDOMLY SHUFFLES DATA
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -18,7 +18,7 @@ for (int i = 0; i < count; i++)
     baseList.Add(new() { Index = i, Text = i.ToString() });
 }
 
-baseList = baseList.Shuffle().ToList();
+baseList = baseList.Shuffle().ToList(); //.Shuffle() slows down the list and array methods
 
 string value;
 
@@ -89,7 +89,7 @@ Console.WriteLine($"Dictionary item {value} searched in {sw.ElapsedTicks:N0} tic
 
 sw.Restart();
 
-value = dict[searchIndex];
+value = dict[searchIndex]; //only time dictionary is fast and worth it: finding the index of a value in an unsorted list
 
 Console.WriteLine($"Dictionary item {value} indexed in {sw.ElapsedTicks:N0} ticks");
 Console.WriteLine();

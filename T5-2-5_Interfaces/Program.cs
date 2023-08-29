@@ -31,7 +31,7 @@ Console.WriteLine("------------");
 
 foreach (var belonging in belongings)
 {
-    if (belonging is IGardenItem gardenItem)
+    if (belonging is IGardenItem gardenItem) //casting belonging to gardenItem
     {
         Console.WriteLine($"{belonging.Name} belongs at {gardenItem.GardenLocation}"); // remember that this is implicitly calling item.ToString()
     }
@@ -47,10 +47,11 @@ Console.WriteLine("Indoor Furniture");
 Console.WriteLine("----------------");
 
 // uses LINQ - more on this later
-foreach (var belonging in belongings.Where(x => x is IIndoorItem && x is IFurnitureItem))
+foreach (var belonging in belongings.Where(x => x is IIndoorItem && x is IFurnitureItem)) //
 {
     Console.WriteLine(belonging); // remember that this is implicitly calling item.ToString()
 }
+//belongings.Where(x => x is IIndoorItem && x is IFurnitureItem)).ToList().ForEach(x => Console.WriteLine(x)) --> example of using LINQ for functional programming ( a lot faster and more powerful than for loop presented)
 
 Console.WriteLine();
 

@@ -40,6 +40,10 @@ Console.WriteLine($"'{str1}' joined with the char ' ' with '{str2}' is '{result4
 Console.WriteLine();
 
 
+Console.WriteLine($" {names[0]} {names[^1]}"); // if you want to return: the first value = 0 ; the last value = ^1
+Console.WriteLine($"{str1[3]}"); // returns the 4th character of str1 !! FIRST CHARACTER == 0 !!
+string newResults = str2.Replace("er", "wibble"); //use single quotation for replacing a single character for another single character ; use speec marks for replacing a string with another strng
+Console.WriteLine($"{newResults} --> {str2}"); // as we defined a new string called newResults in the same line, str2 remains the same --> to change str2 : str2 = str2.Replace("er", "wibble");
 
 
 // Again hover your mouse over the "Join" method to see that this is a *different* join method to the previous one,
@@ -53,15 +57,16 @@ Console.WriteLine();
 
 
 
+
 Console.WriteLine($"int1 = '{int1}' and str1 = '{str1}' before attempted modification in a method");
 
-TestModifyingData(int1, str1);
+TestModifyingData(int2, str1); // defines variables used in "method"
 
 Console.WriteLine($"int1 = '{int1}' and str1 = '{str1}' after failed attempt at modification in a method");
 
 
 
-Console.ReadKey();
+Console.ReadKey(); // prevents program from ending (important on Mac laptops)
 
 
 
@@ -72,3 +77,4 @@ void TestModifyingData(int integer, string str)
     str = str + "...";
     Console.WriteLine($"integer = '{integer}' and str = '{str}' after modification within a method");
 }
+

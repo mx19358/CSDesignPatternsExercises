@@ -12,7 +12,7 @@ List<Vehicle> vehicles = new()
 
 foreach (var vehicle in vehicles)
 {
-    Console.WriteLine(vehicle); // this implicitly calls the ToString() method of the vehicle in question.
+    Console.WriteLine(vehicle); // this implicitly calls the ToString() method of the vehicle in question - method can be overridden if you specify
 }
 
 Console.WriteLine();
@@ -22,7 +22,7 @@ Console.WriteLine();
 
 // Notice the two different options for declaring and setting a class/struct.
 var testClass = new TestClass() { Value = "class text" };
-TestStruct testStruct = new() { Value = "class struct" };
+TestStruct testStruct = new() { Value = "struct text" };
 
 Console.WriteLine($"Class: {testClass.Value}, Struct: {testStruct.Value}");
 
