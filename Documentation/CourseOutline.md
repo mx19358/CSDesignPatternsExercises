@@ -4,7 +4,7 @@ Simon Ziegler, 28 August 2023
 ## 1. What are C# and .NET?
 C# is a "managed language" that runs under the [.NET environment](https://learn.microsoft.com/en-us/dotnet/). .NET is a program that Microsoft publish for major tech operating systems, including Windows, macOS, Linux, iOS and Android. The `dotnet` program is published in two varieties: (i) the "runtime" which is capable of running compiled .NET assemblies and (ii) the Software Development Kit ("SDK") which compiles code to assemblies, performs publishing tasks and can also run assemblies. The SDK is downloaded with Visual Studio, and VS uses the SDK to build and run your code.
 
-C# is derived from the earlier groundbreaking languages C and C++, which date from the early '70s and early '80s respectively. C is a very low level language with a limited core instruction set, where higher level functionality is introduced by incorporating libraries into systems. Being a low level language it's "close to the metal" meaning that there's a tight relationship between what you code and the compiled machine code. This makes C programs extremely fast (important at a time when computers were very low powered) but also prone to unreliability since programmers had free rein to write to any memory address. C++ added object orientation to C, and generally C++ compilers are used for compiling C code. Since C/C++ compile to machine code for the specific microprocessor on the machine where the code is compiled, the compiled programs are not portable to other architectures, requiring compilation separately for any additional architecture.
+C# is derived from the earlier groundbreaking languages C and C++, which date from the early '70s and early '80s respectively. **C is a very low level language** with a limited core instruction set, where higher level functionality is introduced by incorporating libraries into systems. Being a low level language it's "close to the metal" meaning that there's a tight relationship between what you code and the compiled machine code. This makes C programs extremely fast (important at a time when computers were very low powered) but also prone to unreliability since programmers had free rein to write to any memory address. C++ added object orientation to C, and generally C++ compilers are used for compiling C code. Since C/C++ compile to machine code for the specific microprocessor on the machine where the code is compiled, the compiled programs are not portable to other architectures, requiring compilation separately for any additional architecture.
 
 Being a managed language, C# resolves a lot of problems associated with low level C/C++:
 1. It is a "compile once, run anywhere" model, given that all you need to run your assembly for any given architecture is the ability to install the .NET runtime.
@@ -99,15 +99,17 @@ The tutorials I have written for this course will use top level statements.
 #### 5.2.1. Built in data types
 C# has a set of value variable types listed below that represent simple data. Annotations are for those of particular immediate use. See the [C# language reference](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types) for more information.
 
+Data types play a central role in C#. In fact, the emphasis on data types is one of the key distinguishing features of C# compared to other languages (e.g., JavaScript). The designers of C# believed they can _help developers avoid common software bugs_ by _enforcing data types_.
+
 | C# type keyword | .NET type | Notes |
 |:---|:---|:---|
-| bool | System.Boolean | Boolean values, taking the value of either `true` or `false` |
+| bool | System.Boolean | Boolean values, taking the value of either `true` or `false` - used extensively when decision logic is incorporated in code|
 | byte | System.Byte | |
 | sbyte | System.SByte | |
 | char | System.Char | A single character |
-| decimal | System.Decimal | A decimal value with total precision. Compared to float and double uses a lot of memory and is slower, however must be used for say monetary amounts where even tiny rounding errors are unacceptable. |
-| double | System.Double | A double precision floating point number (can have minor rounding errors). Good for most purposes save where full precision is required. |
-| float | System.Single | A standard precision floating point number. In general I don't use floats because the memory overhead of using a double is usually irrelevant compared to the benefit if the far greater precision gained. |
+| decimal | System.Decimal | A decimal value with total precision (28-29 digits post-decimal point). Compared to float and double, this **uses a lot of memory** and is **slower**, however **must be used for monetary amounts** where even tiny rounding errors are unacceptable. |
+| double | System.Double | A double precision (~15-17 digits post-decimal point) floating point number (can have minor rounding errors). Good for most purposes, apart from where full precision is required (e.g. monetary amounts). |
+| float | System.Single | A standard precision (~6-9 digits post-decimal point) floating point number. In general, I don't use floats because the memory overhead of using a double is usually irrelevant compared to the benefit if the far greater precision gained - only good for **fixed fractional values** (e.g. 1/2, 1/4, 1/8). |
 | int | System.Int32 | A simple integer value |
 | uint | System.UInt32 | An unsigned integer value |
 | nint | System.IntPtr | |
@@ -118,7 +120,7 @@ C# has a set of value variable types listed below that represent simple data. An
 | ushort | System.UInt16 | |
 <figcaption><b>Figure 5 - Built in value types</b></figcaption><br><br>
 
-Calling a data type a "value" type indicates that when a variable is passed into a method, its value is passed rather than a reference to the memory holding that variable.
+Calling a data type a "value" type indicates that when a variable is passed into a method, **its value is passed** rather than a reference to the memory holding that variable.
 There are also some built in reference types below whereby passing a variable of that type to a method passes a reference to the memory location holding that variable's data,
 and therefore the method can change the data value (generally considered to be a very bad idea). 
 
