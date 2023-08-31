@@ -96,7 +96,7 @@ The tutorials I have written for this course will use top level statements.
 
 ### 5.2. Language constructs
 
-#### 5.2.1. Built in data types
+#### 5.2.1. Built in data types and variables
 C# has a set of value variable types listed below that represent simple data. Annotations are for those of particular immediate use. See the [C# language reference](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types) for more information.
 
 Data types play a central role in C#. In fact, the emphasis on data types is one of the key distinguishing features of C# compared to other languages (e.g., JavaScript). The designers of C# believed they can _help developers avoid common software bugs_ by _enforcing data types_.
@@ -118,19 +118,39 @@ Data types play a central role in C#. In fact, the emphasis on data types is one
 | ulong | System.UInt64 | |
 | short | System.Int16 | A shorter integer value - not sure of the point of these. |
 | ushort | System.UInt16 | |
-<figcaption><b>Figure 5 - Built in value types</b></figcaption><br><br>
+<figcaption><b>Table 1 - Built in value types</b></figcaption><br><br>
 
-If you need to perform a **mathematical operation on numeric values**, you should use an `int`, `double`, or `decimal`. If you have data that is used for **presentation or text manipulation**, you should use a `string` or `char` data type.
-Calling a data type a "value" type indicates that when a variable is passed into a method, **its value is passed** rather than a reference to the memory holding that variable.
-There are also some built in reference types below whereby passing a variable of that type to a method passes a reference to the memory location holding that variable's data,
-and therefore the method can change the data value (generally considered to be a very bad idea). 
+If you need to perform a **mathematical operation on numeric values**, you should use an `int`, `double`, or `decimal`. If you have data that is used for **presentation or text manipulation** (e.g. working with phone numbers/ZIP codes), you should use a `string` or `char` data type. If you need to work with the **words "true" and "false"** in your application, you would use a `string`. However, if you need to work with the **concept** of true or false when performing an evaluation, you use a `bool`.
+
+A **variable** is a container for storing a type of value that is expected to change/vary throughout the execution of a program. Variables can be assigned, read, and changed and are used to store values that you intend to use later on in your code.
+A **variable name** is a human-friendly label that the compiler assigns to a memory address. When you want to store or change a value in that memory address, or whenever you want to retrieve the stored value, you just use the variable name you created. 
+To **CREATE** a new variable, you must first _declare the data type_ of the variable (using _Table 1_), and then _give it a name_. 
+**Naming convention:**
+- can contain **alphanumeric characters** and **underscores** (but NO other special characters)
+- must BEGIN with a **letter** or **underscore** (however, refrain from using an underscore at the start as developers use the underscore for a special purpose)
+- **case sensitive** - variable names of multiple words are in **camel case** (first letter of the word always in small letter and after that each word starts with a capital letter [e.g. camelCase])
+- should be descriptive and meaningful in code - choose a name for your variable that represents the kind of data it will hold
+- Don't use contractions/abbreviations --> variable name (and therefore purpose) may be unclear to others who are reading your code.
+- Variable names shouldn't include the data type of the variable (e.g. `string`/`char`/`bool`)
+
+The C# compiler can infer your variable's data type just by its initialized value. An **implicitly typed local variable** is created by using `var` followed by a variable initialization:
+```csharp
+var message = "Hello world!";
+```
+<figcaption><b>Figure 5 - Creating a string variable implicitly</b></figcaption><br><br>
+
+The `var` keyword tells the C# compiler that the data type is implied by the assigned value. After the type is implied, the variable acts the same as if the actual data type had been used to declare it. The `var` keyword is used to save on keystrokes when types are lengthy or when the type is obvious from the context. Once the complier has determined the variable's data type, the type is locked in and therefore, the variable will never be able to hold values of a different data type - in Figure 5, the `message` variable is typed to be a `string` and will produce an error if changing to another data type (e.g., a double) is attempted.
+
+<br>
+Calling a data type a "value" type indicates that when a variable is passed into a method, its value is passed rather than a reference to the memory holding that variable.
+There are also some built in reference types below whereby passing a variable of that type to a method passes a reference to the memory location holding that variable's data, and therefore the method can change the data value (generally considered to be a very bad idea). 
 
 | C# type keyword | .NET type | Notes |
 |:---|:---|:---|
 | object | System.Object | All classes are an object. |
 | string | System.String | A string of characters of arbitrary length. |
 | dynamic | System.Object | |
-<figcaption><b>Figure 6 - Built in reference types</b></figcaption><br><br>
+<figcaption><b>Table 2 - Built in reference types</b></figcaption><br><br>
 
 #### Exercise 5.2.1.
 1. Run project `T5-2-1_DataTypes` to see some operations on `int`, `double` and `string` variables.
@@ -138,7 +158,7 @@ and therefore the method can change the data value (generally considered to be a
 1. Now try the same for the next index, `names[3]` and see what happens.
 1. Print out `str1[3]` to see how you can access an indvidual character of a string. Also try `str1[1000]` to see what happens.
 1. Work out how to get a new string called `newResult` that takes the value "Ziegler" in `str2` and replaces the "er" with the text "wibble". Google it. Note that local variables like `newResult` by convention use
-[camel case](https://www.c-sharpcorner.com/UploadFile/8a67c0/C-Sharp-coding-standards-and-naming-conventions/) : first letter of the word always in small letter and after that each word starts with a capital letter (e.g. camelCase). Get to know coding conventions for whatever language you are using.
+[camel case](https://www.c-sharpcorner.com/UploadFile/8a67c0/C-Sharp-coding-standards-and-naming-conventions/). Get to know coding conventions for whatever language you are using.
 
 ### 5.2.2. Conditionals
 There are three types of conditional in C#:
