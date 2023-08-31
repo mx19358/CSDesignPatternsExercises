@@ -120,6 +120,7 @@ Data types play a central role in C#. In fact, the emphasis on data types is one
 | ushort | System.UInt16 | |
 <figcaption><b>Figure 5 - Built in value types</b></figcaption><br><br>
 
+If you need to perform a **mathematical operation on numeric values**, you should use an `int`, `double`, or `decimal`. If you have data that is used for **presentation or text manipulation**, you should use a `string` or `char` data type.
 Calling a data type a "value" type indicates that when a variable is passed into a method, **its value is passed** rather than a reference to the memory holding that variable.
 There are also some built in reference types below whereby passing a variable of that type to a method passes a reference to the memory location holding that variable's data,
 and therefore the method can change the data value (generally considered to be a very bad idea). 
