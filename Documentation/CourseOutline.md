@@ -139,11 +139,11 @@ var message = "Hello world!";
 ```
 <figcaption><b>Figure 5 - Creating a string variable implicitly</b></figcaption><br><br>
 
-The `var` keyword tells the C# compiler that the data type is implied by the assigned value. After the type is implied, the variable acts the same as if the actual data type had been used to declare it. The `var` keyword is used to save on keystrokes when types are lengthy or when the type is obvious from the context. Once the complier has determined the variable's data type, the type is locked in and therefore, the variable will never be able to hold values of a different data type - in Figure 5, the `message` variable is typed to be a `string` and will produce an error if changing to another data type (e.g., a double) is attempted.
+The `var` keyword tells the C# compiler that the data type is implied by the assigned value. After the type is implied, the variable acts the same as if the actual data type had been used to declare it. The `var` keyword is used to save on keystrokes when types are lengthy or when the type is obvious from the context. Once the complier has determined the variable's data type, the type is locked in and therefore, the variable will never be able to hold values of a different data type - in Figure 5, the `message` variable is typed to be a `string` and will produce an error if changing to another data type (e.g., a double) is attempted. **REMEMBER:** you must give the value of the variable in order to use `var`. The `var` keyword can also be useful when planning the code for an application. When you begin developing code for a task, you may not immediately know what data type to use. Using `var` can help you develop your solution more dynamically.
 
-<br>
 Calling a data type a "value" type indicates that when a variable is passed into a method, its value is passed rather than a reference to the memory holding that variable.
 There are also some built in reference types below whereby passing a variable of that type to a method passes a reference to the memory location holding that variable's data, and therefore the method can change the data value (generally considered to be a very bad idea). 
+
 
 | C# type keyword | .NET type | Notes |
 |:---|:---|:---|
@@ -151,6 +151,68 @@ There are also some built in reference types below whereby passing a variable of
 | string | System.String | A string of characters of arbitrary length. |
 | dynamic | System.Object | |
 <figcaption><b>Table 2 - Built in reference types</b></figcaption><br><br>
+
+#### Escape character sequences
+An **escape character sequence** is an instruction to the runtime to insert a special character that will affect the output of your string.
+- `\n` : creates a new line
+- `\t` : inserts a tab space
+- `\"` : inserts double-quotation marks within a literal string
+- `\\` : displays a single backslash \ in the literal string
+
+#### Verbatim string literal
+A **verbatim string literal** will keep all whitespace and characters without the need to use escape character sequences. To create a verbatim string, use the `@` directive before the literal string.
+```csharp
+Console.WriteLine(@"    c:\source\repos    
+        (this is where your code goes)");
+```
+
+#### Unicode escape characters
+**Encoded characters** can be added in literal strings using the `\u` escape sequence, then a **four-character code** representing some character in **Unicode (UTF-16)**.
+Some consoles (e.g. Windows Command Prompt) will not display all Unicode characters and will replace those characters with question mark characters instead. Furthermore, some characters require _UTF-32_ and therefore _require a different escape sequence_. This is a complicated subject, and therefore, you may need to use Google depending on your needs.
+
+```csharp
+// Output: こんにちは World!
+Console.WriteLine("\u3053\u3093\u306B\u3061\u306F World!");
+
+// To generate Japanese invoices:
+// Output: 日本の請求書を生成するには：
+Console.Write("\n\n\u65e5\u672c\u306e\u8acb\u6c42\u66f8\u3092\u751f\u6210\u3059\u308b\u306b\u306f\uff1a\n\t");
+// User command to run an application
+Console.WriteLine(@"c:\invoices\app.exe -j");
+```
+
+#### String concatenation
+**String concatenation** allows you to combine smaller literal and variable strings into a single string. The second value is appended to the end of the first value, etc. However, when printing concatenated strings, it is best to **avoid creating intermediate variables** if adding them doesn't increase readability; this means that, instead of doing this:
+```csharp
+string greeting = "Hello";
+string firstName = "Bob";
+string message = greeting + " " + firstName + "!"; //creating an intermediate variable
+Console.WriteLine(message);
+```
+it is better to do the following:
+```csharp
+string firstName = "Bob";
+string greeting = "Hello";
+Console.WriteLine(greeting + " " + firstName + "!"); //avoiding the use of intermediate variables by performing the concatenation operation directly when needed
+```
+
+#### String interpolation
+**String interpolation** combines multiple values into a single literal string by using a "template" and one or more interpolation expressions. It provides an improvement over string concatenation by reducing the number of characters required in some situations.
+- The literal string becomes a template when it's prefixed by the `$` character.
+- An interpolation expression is a variable surrounded by an opening and closing curly brace symbol `{ }`.
+```csharp
+int version = 11;
+string updateText = "Update to Windows";
+Console.WriteLine($"{updateText} {version}!");
+```
+If you need to use a verbatim literal in your template, you can use both the verbatim literal prefix symbol `@` and the string interpolation `$` symbol together.
+```csharp
+string projectName = "First-Project";
+Console.WriteLine($@"C:\Output\{projectName}\Data");
+```
+```output
+C:\Output\First-Project\Data
+```
 
 #### Exercise 5.2.1.
 1. Run project `T5-2-1_DataTypes` to see some operations on `int`, `double` and `string` variables.
