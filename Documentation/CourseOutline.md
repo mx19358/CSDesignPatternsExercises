@@ -4,6 +4,14 @@ Simon Ziegler, 28 August 2023
 ## 1. What are C# and .NET?
 C# is a "managed language" that runs under the [.NET environment](https://learn.microsoft.com/en-us/dotnet/). .NET is a program that Microsoft publish for major tech operating systems, including Windows, macOS, Linux, iOS and Android. The `dotnet` program is published in two varieties: (i) the "runtime" which is capable of running compiled .NET assemblies and (ii) the Software Development Kit ("SDK") which compiles code to assemblies, performs publishing tasks and can also run assemblies. The SDK is downloaded with Visual Studio, and VS uses the SDK to build and run your code.
 
+The C# programming language allows you to build many types of applications, like:
+- Business applications to capture, analyze, and process data
+- Dynamic web applications that can be accessed from a web browser
+- Games, both 2D and 3D
+- Financial and scientific applications
+- Cloud-based applications
+- Mobile applications
+
 C# is derived from the earlier groundbreaking languages C and C++, which date from the early '70s and early '80s respectively. **C is a very low level language** with a limited core instruction set, where higher level functionality is introduced by incorporating libraries into systems. Being a low level language it's "close to the metal" meaning that there's a tight relationship between what you code and the compiled machine code. This makes C programs extremely fast (important at a time when computers were very low powered) but also prone to unreliability since programmers had free rein to write to any memory address. C++ added object orientation to C, and generally C++ compilers are used for compiling C code. Since C/C++ compile to machine code for the specific microprocessor on the machine where the code is compiled, the compiled programs are not portable to other architectures, requiring compilation separately for any additional architecture.
 
 Being a managed language, C# resolves a lot of problems associated with low level C/C++:
@@ -69,6 +77,10 @@ We are going to concern ourselves exclusively with `.cs` C# source code files fr
 This last section of the course will focus on some core C# constructs, some standard classes associated with collections of data and a package called LINQ that manipulates these collections in a manner similar to SQL with databases. In fact there's a LINQ to SQL package as part of .NET.
 
 ### 5.1. Main method
+To print an entire message to the output console, you used the first technique, `Console.WriteLine()`. At the end of the line, it added a line feed similar to how to **create a new line** of text by pressing Enter or Return.
+
+To print to the output console, but **without adding a line** feed at the end, you used the second technique, `Console.Write()`. So, the next call to `Console.Write()` prints another message to the **same line**.
+
 Up to and including C# version 9, you needed a Main method within a class as the entry point for a program as per the example below. This is what is shown in the Udemy course, which was recorded in 2017.
 
 ```csharp
@@ -91,6 +103,8 @@ From C# version 10, released with .NET 6 in November 2020, this was significantl
 Console.WriteLine("Hello, World!");
 ```
 <figcaption><b>Figure 4 - C# 10 top level statements</b></figcaption><br><br>
+
+The primary job of the compiler is to convert your code into a format that the computer can understand.
 
 The tutorials I have written for this course will use top level statements.
 
