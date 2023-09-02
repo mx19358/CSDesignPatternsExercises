@@ -2,9 +2,9 @@
 Simon Ziegler, 28 August 2023
 
 ## 1. What are C# and .NET?
-C# is a "managed language" that runs under the [.NET environment](https://learn.microsoft.com/en-us/dotnet/). .NET is a program that Microsoft publish for major tech operating systems, including Windows, macOS, Linux, iOS and Android. The `dotnet` program is published in two varieties: (i) the "runtime" which is capable of running compiled .NET assemblies and (ii) the Software Development Kit ("SDK") which compiles code to assemblies, performs publishing tasks and can also run assemblies. The SDK is downloaded with Visual Studio, and VS uses the SDK to build and run your code.
+C# is a "managed language" that runs under the [.NET environment](https://learn.microsoft.com/en-us/dotnet/). .NET is a program that Microsoft publish for major tech operating systems, including Windows, macOS, Linux, iOS and Android. The `dotnet` program is published in two varieties: (i) the "runtime" which is capable of running compiled .NET assemblies and (ii) the Software Development Kit ("SDK") which compiles code to assemblies, performs publishing tasks and can also run assemblies. The SDK is downloaded with Visual Studio, and Visual Studio uses the SDK to build and run your code.
 
-The C# programming language allows you to build many types of applications, like:
+The C# programming language allows you to build many types of applications, such as:
 - Business applications to capture, analyze, and process data
 - Dynamic web applications that can be accessed from a web browser
 - Games, both 2D and 3D
@@ -23,6 +23,10 @@ Being a managed language, C# resolves a lot of problems associated with low leve
 So:
 - C# is the programming language (also F# and VB.NET).
 - .NET is the platform and compiles/publishes C# to .NET assemblies, then runs those assemblies.
+
+### IDEs
+Developers use a specialized tool known as an integrated development environment (IDE) to help speed up the process of writing, debugging, testing, updating/versioning, and releasing code. An IDE typically includes a suite of tools that support the software development process from beginning to end, a process known as the development lifecycle. The IDE tools enable the developer to work more efficiently and can help the developer, or team of developers, to write, debug, test, publish, and version their code more easily. 
+- Visual Studio Code is one of the most popular IDEs among C# developers - a full-featured IDE that's quick and easy to install, and that it supports numerous extensions to enhance developer productivity.
 
 ## 2. Introduction to the `dotnet` command line tool and how it works with a CSPROJ file
 The [.NET Command Line Interface](https://learn.microsoft.com/en-us/dotnet/core/tools/) ("CLI") is invoked by running the `dotnet` command from the command line. On windows the command line is run either from the command shell or better by running powershell - both from the start menu. Examples include:
@@ -54,8 +58,24 @@ Note how in each case we are referencing the `CSPROJ` ("C # project file") file,
 
 Also see the considerably more complex [CSPROJ](https://github.com/Material-Blazor/Material.Blazor/blob/main/Material.Blazor/Material.Blazor.csproj) file built by Mark for Material.Blazor.
 
+The .NET software development kit (SDK) includes a command-line interface (CLI) that can also be accessed from **Visual Studio's integrated Terminal** (Developer PowerShell).
+
+```dotnet
+dotnet new console -o ./CsharpProjects/TestProject
+```
+The structure of a CLI command consists of three parts:
+- The **driver** (ex. `dotnet`)
+- The **command** (ex. `new console`)
+- The **command arguments** (ex. `-o ./CsharpProjects/TestProject`) --> NB: Command arguments are _optional_ parameters that can be used to provide additional information. The previous command could be run without specifying the optional folder location: `dotnet new console` results in the new console application being created in the current folder location.
+
+The `dotnet build` command builds the project and its dependencies into a set of binaries. The binaries include the project's code in Intermediate Language (IL) files with a .dll extension. Depending on the project type and settings, other files may also be included. 
+![image](https://github.com/mx19358/CSDesignPatternsExercises/assets/143491084/2974ca02-4c89-4795-9f98-6155a9f0cb06)
+<figcaption><b>Figure 1 - using `dotnet build` in the terminal</b></figcaption><br><br>
+
+The `dotnet run` command runs the file from the terminal. This is useful for quick checks/fast iterative development from the command line. However, it relies on `dotnet build` command to build the code prior to using `dotnet run`.
+
 ## 3. Using `dotnet` with GitHub workflows
-[GitHub](https://github.com/) (or its competitors [GitLab](https://about.gitlab.com/), [Bitbucket](https://bitbucket.org/) etc.) is a source code repository using the Git source code control system. This project is hosted on GitHub. GitHub offers much more than just source code control, and is a complete "Devops" envronment for software development. This includes automated software build and deployment using GitHub workflows. A (rather complex) [example](https://github.com/Material-Blazor/Material.Blazor/blob/main/.github/workflows/GithubActionsRelease.yml), again written by Mark, deploys releases of Material.Blazor, both creating and publishing the project's [Nuget package](https://www.nuget.org/packages/Material.Blazor), and building and deploying the [website](https://material-blazor.com/).
+[GitHub](https://github.com/) (or its competitors [GitLab](https://about.gitlab.com/), [Bitbucket](https://bitbucket.org/) etc.) is a source code repository using the Git source code control system. This project is hosted on GitHub. GitHub offers much more than just source code control, and is a complete "Devops" environment for software development. This includes automated software build and deployment using GitHub workflows. A (rather complex) [example](https://github.com/Material-Blazor/Material.Blazor/blob/main/.github/workflows/GithubActionsRelease.yml), again written by Mark, deploys releases of Material.Blazor, both creating and publishing the project's [Nuget package](https://www.nuget.org/packages/Material.Blazor), and building and deploying the [website](https://material-blazor.com/).
 
 ## 4. Overall C# program structure
 Bringing the previous sections together gives a good appreciation of the structure around building a .NET program or library, albeit without seeing the code. The image below is the structure of this repo at the time of writing. If you're reading this on GitHub you'll see the current structure to the left, otherwise from Visual Studio this is in the Solution Explorer.
