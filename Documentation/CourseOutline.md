@@ -96,7 +96,7 @@ The tutorials I have written for this course will use top level statements.
 
 ### 5.2. Language constructs
 
-#### 5.2.1. Built in data types and variables
+### 5.2.1. Built in data types and variables
 C# has a set of value variable types listed below that represent simple data. Annotations are for those of particular immediate use. See the [C# language reference](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types) for more information.
 
 Data types play a central role in C#. In fact, the emphasis on data types is one of the key distinguishing features of C# compared to other languages (e.g., JavaScript). The designers of C# believed they can _help developers avoid common software bugs_ by _enforcing data types_.
@@ -119,6 +119,14 @@ Data types play a central role in C#. In fact, the emphasis on data types is one
 | short | System.Int16 | A shorter integer value - not sure of the point of these. |
 | ushort | System.UInt16 | |
 <figcaption><b>Table 1 - Built in value types</b></figcaption><br><br>
+
+| C# type keyword | Literal suffix | Notes |
+|:---|:---|:---|
+| decimal | M m | |
+| double | | Compiler defaults to double literal when **decimal** is entered WITHOUT a literal suffix |
+| float | F f | |
+| int | | Compiler defaults to int literal when a **whole number** is entered |
+<figcaption><b>Table 2 - Literal suffixes</b></figcaption><br><br>
 
 If you need to perform a **mathematical operation on numeric values**, you should use an `int`, `double`, or `decimal`. If you have data that is used for **presentation or text manipulation** (e.g. working with phone numbers/ZIP codes), you should use a `string` or `char` data type. If you need to work with the **words "true" and "false"** in your application, you would use a `string`. However, if you need to work with the **concept** of true or false when performing an evaluation, you use a `bool`.
 
@@ -150,23 +158,23 @@ There are also some built in reference types below whereby passing a variable of
 | object | System.Object | All classes are an object. |
 | string | System.String | A string of characters of arbitrary length. |
 | dynamic | System.Object | |
-<figcaption><b>Table 2 - Built in reference types</b></figcaption><br><br>
+<figcaption><b>Table 3 - Built in reference types</b></figcaption><br><br>
 
-#### Escape character sequences
+### Escape character sequences
 An **escape character sequence** is an instruction to the runtime to insert a special character that will affect the output of your string.
 - `\n` : creates a new line
 - `\t` : inserts a tab space
 - `\"` : inserts double-quotation marks within a literal string
 - `\\` : displays a single backslash \ in the literal string
 
-#### Verbatim string literal
+### Verbatim string literal
 A **verbatim string literal** will keep all whitespace and characters without the need to use escape character sequences. To create a verbatim string, use the `@` directive before the literal string.
 ```csharp
 Console.WriteLine(@"    c:\source\repos    
         (this is where your code goes)");
 ```
 
-#### Unicode escape characters
+### Unicode escape characters
 **Encoded characters** can be added in literal strings using the `\u` escape sequence, then a **four-character code** representing some character in **Unicode (UTF-16)**.
 Some consoles (e.g. Windows Command Prompt) will not display all Unicode characters and will replace those characters with question mark characters instead. Furthermore, some characters require _UTF-32_ and therefore _require a different escape sequence_. This is a complicated subject, and therefore, you may need to use Google depending on your needs.
 
@@ -181,7 +189,7 @@ Console.Write("\n\n\u65e5\u672c\u306e\u8acb\u6c42\u66f8\u3092\u751f\u6210\u3059\
 Console.WriteLine(@"c:\invoices\app.exe -j");
 ```
 
-#### String concatenation
+### String concatenation
 **String concatenation** allows you to combine smaller literal and variable strings into a single string. The second value is appended to the end of the first value, etc. However, when printing concatenated strings, it is best to **avoid creating intermediate variables** if adding them doesn't increase readability; this means that, instead of doing this:
 ```csharp
 string greeting = "Hello";
@@ -196,7 +204,7 @@ string greeting = "Hello";
 Console.WriteLine(greeting + " " + firstName + "!"); //avoiding the use of intermediate variables by performing the concatenation operation directly when needed
 ```
 
-#### String interpolation
+### String interpolation
 **String interpolation** combines multiple values into a single literal string by using a "template" and one or more interpolation expressions. It provides an improvement over string concatenation by reducing the number of characters required in some situations.
 - The literal string becomes a template when it's prefixed by the `$` character.
 - An interpolation expression is a variable surrounded by an opening and closing curly brace symbol `{ }`.
@@ -209,9 +217,141 @@ If you need to use a verbatim literal in your template, you can use both the ver
 ```csharp
 string projectName = "First-Project";
 Console.WriteLine($@"C:\Output\{projectName}\Data");
-```
-```output
+
+// Output:
 C:\Output\First-Project\Data
+```
+
+### The addition operator
+You can use the addition operator to:
+- Add two numeric `int` values together.
+```csharp
+int firstNumber = 12;
+int secondNumber = 7;
+Console.WriteLine(firstNumber + secondNumber);
+
+// Output:
+19
+```
+- Concatenate operands of different data types together to force implicit type conversions.
+```csharp
+string firstName = "Bob";
+int widgetsSold = 7;
+Console.WriteLine(firstName + " sold " + widgetsSold + " widgets.");
+
+// Output:
+Bob sold 7 widgets.
+```
+```csharp
+string firstName = "Bob";
+int widgetsSold = 7;
+Console.WriteLine(firstName + " sold " + widgetsSold + 7 + " widgets.");
+
+// Output:
+Bob sold 77 widgets.
+```
+Instead of adding the `int` variable `widgetsSold` to the literal `int` 7, the _compiler treats everything as a string_ and concatenates it all together. Use parentheses `( )` to perform both a calculation and concatenation in a single line of code:
+```csharp
+string firstName = "Bob";
+int widgetsSold = 7;
+Console.WriteLine(firstName + " sold " + (widgetsSold + 7) + " widgets."); //parentheses form the order of operations operator --> treats 7 as an int, just like widgetsSold
+
+// Output:
+Bob sold 14 widgets.
+```
+
+### Basic math operators
+- `+` is the addition operator
+- `-` is the subtraction operator
+- `*` is the multiplication operator
+- `/` is the division operator.
+**NB:** when dividing `int` values, decimals will be removed from the result as `int` by definition holds no decimal points (e.g. 1.75 will become 1). To see division working properly, you need to use a data type that _supports fractional digits_ after the decimal point like `double` or `decimal`:
+```csharp
+decimal decimalQuotient = 7.0m / 5;
+decimal decimalQuotient = 7 / 5.0m;
+double decimalQuotient = 7.0 / 5.0;
+Console.WriteLine($"Decimal quotient: {decimalQuotient}");
+
+// Output:
+Decimal quotient: 1.4
+```
+As you can see, you must declare the quotient (left of the assignment operator) as type `decimal`/`float`/`double` and at least one of numbers being divided must also be of type `decimal`/`float`/`double` (both numbers can also be `decimal`/`float`/`double` type). Therefore, the following codes will not produce accurate results:
+```csharp
+int decimalQuotient = 7 / 5.0m;
+int decimalQuotient = 7.0m / 5;
+int decimalQuotient = 7.0m / 5.0m;
+decimal decimalQuotient = 7 / 5;
+
+// Output:
+1
+```
+However, if you need to perform division on `int` values and do not wish the result to be truncated, you must perform a data type cast from `int` to `decimal`/`float`/`double`. **Casting** is one type of data conversion that instructs the compiler to temporarily treat a value as if it were a different data type:
+```csharp
+int first = 7;
+int second = 5;
+Console.WriteLine( (decimal)first / (decimal)second );
+
+// Output:
+1.4
+```
+- `%` is the **modulus operator** - tells you the remainder of `int` division
+```csharp
+Console.WriteLine($"Modulus of 200/5 = {200 % 5}");
+Console.WriteLine($"Modulus of 7/5 = {7 % 5}");
+
+// Output:
+Modulus of 200/5 = 0 //means that 200 (dividend) is divisible by 5 (divisor)
+Modulus of 7/5 = 2
+```
+
+### Order of operations
+C# follows the same order as BEDMAS except for exponents. While there's no exponent operator in C#, you can use the [System.Math.Pow method](https://learn.microsoft.com/en-us/dotnet/api/system.math.pow?view=net-7.0).
+1. **B**rackets
+2. **E**xponents
+3. **D**ivision and **M**ultiplication (L --> R)
+4. **A**ddition and **S**ubtraction (L --> R)
+
+### Compound assignment operators
+The compound assignment operators compound some operation in addition to assigning the result to the variable.
+- `+=` is the _addition assignment_ operator. It adds the value on the right of the operator to the variable.
+```csharp
+int value = 0;     // value is 0.
+value += 5;        // value is now 5.
+```
+- `-=` subtracts the value on the right of the operator from the variable.
+```csharp
+int value = 0;     // value is 0.
+value -= 5;        // value is now -5.
+```
+- `*=` multiplies the value on the right of the operator by the variable.
+```csharp
+int value = 10;     // value is 10.
+value *= 2;         // value is now 20.
+```
+- `++` increments the value of the variable by 1.
+```csharp
+int value = 0;     // value is 0.
+value++;       	   // value is now 1.
+```
+- `--` decrements the value of the variable by 1.
+```csharp
+int value = 0;     // value is 0.
+value --;          // value is now -1.
+```
+Depending on the position of the incrememnt and decrement operators, the operators perform their operation before or after they retrieve their value. In other words, if you use the operator before the value as in `++value`, then the increment will happen _before_ the value is retrieved. Likewise, `value++` will increment the value _after_ the value has been retrieved.
+```csharp
+int value = 1;
+value++;
+Console.WriteLine("First: " + value);
+Console.WriteLine("Second: " + value++); //Retrieve the current value of the variable value and use that in the string interpolation operation and THEN Increment the value.
+Console.WriteLine("Third: " + value);
+Console.WriteLine("Fourth: " + (++value)); //Increment the value and THEN Retrieve the new incremented value of the variable value and use that in the string interpolation operation.
+
+// Output:
+First: 2
+Second: 2
+Third: 3
+Fourth: 4
 ```
 
 #### Exercise 5.2.1.
